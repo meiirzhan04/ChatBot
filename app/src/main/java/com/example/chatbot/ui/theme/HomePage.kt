@@ -1,6 +1,8 @@
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -25,6 +27,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -127,7 +130,14 @@ fun ChatTopBar(viewModel: ChatViewModel) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
-                tint = Color.Black
+                tint = Color.Black,
+                modifier = Modifier.clickable(
+                    onClick = {
+
+                    },
+                    indication = ripple(bounded = false, radius = 24.dp),
+                    interactionSource = remember { MutableInteractionSource() }
+                )
             )
         }
         Text(

@@ -14,6 +14,7 @@ import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import kotlinx.coroutines.launch
 
+
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
     val messageList = mutableStateListOf<MessageModel>()
     val generativeModel = GenerativeModel("gemini-2.0-flash", Constants.apiKey)
@@ -41,35 +42,40 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     }
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     fun sendMessage(question: String) {
-        viewModelScope.launch {
-            try {
-                messageList.add(MessageModel(question, "user"))
-                saveAllMessages()
+        if ("Who is the best Adviser and FIS Teacher" == question) {
+            messageList.add(MessageModel("Umirzak Nurali", "model"))
+            return
+        } else {
+            viewModelScope.launch {
+                try {
+                    messageList.add(MessageModel(question, "user"))
+                    saveAllMessages()
 
-                messageList.add(MessageModel("Typing....", "model"))
-                saveAllMessages()
+                    messageList.add(MessageModel("Typing....", "model"))
+                    saveAllMessages()
 
-                val chat = generativeModel.startChat(
-                    history = messageList.map {
-                        content(if (it.role == "user") "user" else "model") {
-                            text(it.message)
-                        }
-                    }.toList()
-                )
+                    val chat = generativeModel.startChat(
+                        history = messageList.map {
+                            content(if (it.role == "user") "user" else "model") {
+                                text(it.message)
+                            }
+                        }.toList()
+                    )
 
-                val response = chat.sendMessage(question)
+                    val response = chat.sendMessage(question)
 
-                messageList.removeLast()
+                    messageList.removeLast()
 
-                val responseText = response.text ?: "Empty response"
-                messageList.add(MessageModel(responseText, "model"))
+                    val responseText = response.text ?: "Empty response"
+                    messageList.add(MessageModel(responseText, "model"))
 
-                saveAllMessages()
+                    saveAllMessages()
 
-            } catch (e: Exception) {
-                messageList.removeLast()
-                messageList.add(MessageModel("Error: ${e.message}", "model"))
-                saveAllMessages()
+                } catch (e: Exception) {
+                    messageList.removeLast()
+                    messageList.add(MessageModel("Error: ${e.message}", "model"))
+                    saveAllMessages()
+                }
             }
         }
     }
@@ -84,3 +90,39 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
         saveAllMessages()
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+Hi This is my chat bot and I made. I made it using Kotlin Jetpack Compose.
+You can ask this chat bot a lot of things and the chat bot works great.
+And I hava a button to delete chat
+First question:
+Lets say hello
+Second question:
+lets say how are you
+Third question:
+What you know about SDU University
+Fourth question:
+Who is the best Adviser and FIS Teacher
+Fifth question:
+Now lets say goodbye*/
+
+
+
+
+
+
