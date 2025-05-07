@@ -70,7 +70,6 @@ fun MainChat(viewModel: ChatViewModel) {
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
-
         onDispose {
             lifecycleOwner.lifecycle.removeObserver(observer)
         }
@@ -102,7 +101,6 @@ fun MainChat(viewModel: ChatViewModel) {
             MessageList(
                 messageList = viewModel.messageList
             )
-
         }
     }
 }
@@ -126,22 +124,22 @@ fun ChatTopBar(viewModel: ChatViewModel) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        IconButton(onClick = {}) {
+        IconButton(
+            onClick = {},
+        ) {
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "",
                 tint = Color.Black,
                 modifier = Modifier.clickable(
-                    onClick = {
-
-                    },
+                    onClick = {},
                     indication = ripple(bounded = false, radius = 24.dp),
                     interactionSource = remember { MutableInteractionSource() }
                 )
             )
         }
         Text(
-            text = "Chat Bot",
+            text = "AI Bot",
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black
@@ -208,6 +206,7 @@ fun ChatInputField(
         )
     }
 }
+
 @Composable
 fun MessageList(messageList: List<MessageModel>) {
     val listState = rememberLazyListState()
@@ -233,7 +232,7 @@ fun MessageRow(messageModel: MessageModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 8.dp, vertical = 4.dp),
+            .padding(horizontal = 12.dp, vertical = 4.dp),
         horizontalArrangement = if (isModel) Arrangement.Start else Arrangement.End,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -245,7 +244,12 @@ fun MessageRow(messageModel: MessageModel) {
         ) {
             Text(
                 text = messageModel.message,
-                style = TextStyle(color = if (isModel) Color.Black else Color.White, fontSize = 16.sp, fontWeight = FontWeight.Normal, letterSpacing = 0.5.sp)
+                style = TextStyle(
+                    color = if (isModel) Color.Black else Color.White,
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.Normal,
+                    letterSpacing = 0.5.sp
+                )
             )
         }
     }

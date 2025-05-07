@@ -40,10 +40,12 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             saveMessages(getApplication(), botMessages, BOT_MESSAGE_KEY)
         }
     }
+
     @RequiresApi(Build.VERSION_CODES.VANILLA_ICE_CREAM)
     fun sendMessage(question: String) {
-        if ("Who is the best Adviser and FIS Teacher" == question) {
-            messageList.add(MessageModel("Umirzak Nurali", "model"))
+        if ("Who is the best English Teacher" == question) {
+            messageList.add(MessageModel("Sandugash Abdyrakhimova", "model"))
+            saveAllMessages()
             return
         } else {
             viewModelScope.launch {
@@ -79,6 +81,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
     }
+
     fun clearMessage() {
         viewModelScope.launch {
             messageList.clear()
@@ -86,6 +89,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             saveMessages(getApplication(), emptySet(), BOT_MESSAGE_KEY)
         }
     }
+
     fun saveAllMessagesOnExit() {
         saveAllMessages()
     }
@@ -94,32 +98,6 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-Hi This is my chat bot and I made. I made it using Kotlin Jetpack Compose.
-You can ask this chat bot a lot of things and the chat bot works great.
-And I hava a button to delete chat
-First question:
-Lets say hello
-Second question:
-lets say how are you
-Third question:
-What you know about SDU University
-Fourth question:
-Who is the best Adviser and FIS Teacher
-Fifth question:
-Now lets say goodbye*/
 
 
 

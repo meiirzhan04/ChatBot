@@ -53,8 +53,11 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("com.google.ai.client.generativeai:generativeai:0.9.0")
-
-
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
+    implementation ("com.google.mlkit:translate:17.0.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.json:json:20230227")
+    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
